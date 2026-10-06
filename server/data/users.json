@@ -1,0 +1,45 @@
+[
+  {
+    "id": "USR-ADMIN-001",
+    "role": "admin",
+    "name": "Vikas Kumar",
+    "username": "hodvikaskumar",
+    "email": "hodvikaskumar@csmu.ac.in",
+    "passwordHash": "$2a$10$zWMNNrK.Ov50EzCgzU.UpuIZHU1yERHEDBfldgriaTBWDNWHca.kK",
+    "department": "Estate & Facilities Administration",
+    "createdAt": "2026-10-06T06:25:11.290Z"
+  },
+  {
+    "id": "USR-STU-MUWAOZQK-3677",
+    "role": "student",
+    "name": "Swaroop Patil",
+    "email": "swaroop.patil@csmu.ac.in",
+    "enrollmentNumber": "CSMU2024881",
+    "passwordHash": "$2a$10$NKBkUhPiE1hhOuE6CflkY.8uFUpGdMutAGKBTEWNGAp70bBHYIB5a",
+    "department": "Computer Science & Engineering",
+    "year": "3rd Year",
+    "createdAt": "2026-10-06T06:26:00.044Z"
+  },
+  {
+    "id": "USR-STU-MUWB55GZ-2356",
+    "role": "student",
+    "name": "Prathamesh Shinde",
+    "email": "student_1791268713907@csmu.ac.in",
+    "enrollmentNumber": "CSMU713907",
+    "passwordHash": "$2a$10$vWaJdl1wvFQJxgjJTsjqxOA0LxQUVCCAY6PUDXBikC3cBbR0S8hSK",
+    "department": "Computer Science & Engineering",
+    "year": "2nd Year",
+    "createdAt": "2026-10-06T06:38:33.971Z"
+  },
+  {
+    "id": "USR-STU-MUWBDPMR-1664",
+    "role": "student",
+    "name": "Swaroop khot",
+    "email": "swaroopkhot@csmu.ac.in",
+    "enrollmentNumber": "CSMU2024001",
+    "passwordHash": "$2a$10$GpmKaGL7073vIMH/KzYg/usFC2cnQaujwBITi.UaXpkIqT87JsxW.",
+    "department": "Computer Science & Engineering",
+    "year": "2nd Year",
+    "createdAt": "2026-10-06T06:45:13.347Z"
+  }
+]

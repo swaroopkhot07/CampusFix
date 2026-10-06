@@ -1,0 +1,620 @@
+/* ==========================================================================
+   CampusFix Design System - Chhatrapati Shivaji Maharaj University (CSMU)
+   Visual Identity: Warm Wooden Brown, Ivory/Cream, Charcoal, Gold & Maroon Accents
+   ========================================================================== */
+
+:root {
+  /* Warm Wooden Brown Palette */
+  --wood-900: #2C180B;
+  --wood-800: #3F2210;
+  --wood-700: #542D15;
+  --wood-600: #6B3A1C;
+  --wood-500: #854823;
+  --wood-400: #A26136;
+  --wood-300: #C2855B;
+  --wood-200: #E2B594;
+  --wood-100: #F4E2D3;
+  --wood-50:  #FAF3EC;
+
+  /* Cream / Ivory Surfaces */
+  --ivory-50:  #FDFCF9;
+  --ivory-100: #FAF7F0;
+  --ivory-200: #F4EFE2;
+  --ivory-300: #EAE1D0;
+  --ivory-400: #DDD0BA;
+  --ivory-500: #C9B89C;
+
+  /* Neutrals & Dark Charcoal Text */
+  --charcoal-900: #14171A;
+  --charcoal-800: #22262B;
+  --charcoal-700: #363C44;
+  --charcoal-600: #505761;
+  --charcoal-500: #6D7581;
+  --charcoal-400: #939BA5;
+  --charcoal-300: #C1C6CD;
+  --charcoal-200: #E2E5E8;
+  --charcoal-100: #F1F3F5;
+  --white: #FFFFFF;
+
+  /* University Accents: Muted Gold & Royal Maroon */
+  --gold-primary: #C29227;
+  --gold-hover:   #AA7D19;
+  --gold-light:   #FBF3DB;
+  --gold-border:  #E8CE7D;
+  --maroon-primary: #851C28;
+  --maroon-hover:   #6E141E;
+  --maroon-light:   #FDF0F2;
+  --maroon-border:  #F2BAC1;
+
+  /* Status Tokens */
+  --status-pending-bg:   #FFF7ED;
+  --status-pending-text: #C2410C;
+  --status-pending-border: #FDBA74;
+
+  --status-progress-bg:   #EFF6FF;
+  --status-progress-text: #1D4ED8;
+  --status-progress-border: #93C5FD;
+
+  --status-resolved-bg:   #F0FDF4;
+  --status-resolved-text: #15803D;
+  --status-resolved-border: #86EFAC;
+
+  /* Priority Tokens */
+  --priority-critical-bg:   #FEF2F2;
+  --priority-critical-text: #B91C1C;
+  --priority-critical-border: #FCA5A5;
+
+  --priority-high-bg:   #FFF7ED;
+  --priority-high-text: #C2410C;
+  --priority-high-border: #FDBA74;
+
+  --priority-medium-bg:   #FEFCE8;
+  --priority-medium-text: #A16207;
+  --priority-medium-border: #FDE047;
+
+  --priority-low-bg:   #F0FDF4;
+  --priority-low-text: #15803D;
+  --priority-low-border: #86EFAC;
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(44, 24, 11, 0.05);
+  --shadow-sm: 0 1px 3px rgba(44, 24, 11, 0.07), 0 1px 2px rgba(44, 24, 11, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(44, 24, 11, 0.08), 0 2px 4px -1px rgba(44, 24, 11, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(44, 24, 11, 0.09), 0 4px 6px -2px rgba(44, 24, 11, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(44, 24, 11, 0.1), 0 10px 10px -5px rgba(44, 24, 11, 0.04);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* ==========================================================================
+   Base Styles & Reset
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ivory-100);
+  color: var(--charcoal-800);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--wood-900);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+p {
+  color: var(--charcoal-700);
+}
+
+a {
+  color: var(--wood-700);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--wood-900);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 0.95rem;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--charcoal-800);
+}
+
+/* ==========================================================================
+   Layout Containers & Utilities
+   ========================================================================== */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ivory-100);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .page-header-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.page-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--wood-900);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.page-subtitle {
+  color: var(--charcoal-600);
+  font-size: 1rem;
+  max-width: 680px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--wood-700);
+  color: var(--ivory-50);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--wood-800);
+}
+
+.btn-primary:hover {
+  background-color: var(--wood-800);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--ivory-50);
+  color: var(--wood-800);
+  border: 1px solid var(--ivory-400);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover {
+  background-color: var(--ivory-200);
+  border-color: var(--wood-400);
+  color: var(--wood-900);
+}
+
+.btn-accent {
+  background-color: var(--maroon-primary);
+  color: var(--white);
+  border: 1px solid var(--maroon-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover {
+  background-color: var(--maroon-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-gold {
+  background-color: var(--gold-primary);
+  color: var(--wood-900);
+  font-weight: 700;
+  border: 1px solid var(--gold-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-hover);
+  color: var(--white);
+}
+
+.btn-outline-wood {
+  background: transparent;
+  color: var(--wood-700);
+  border: 1.5px solid var(--wood-500);
+}
+
+.btn-outline-wood:hover {
+  background-color: var(--wood-50);
+  color: var(--wood-900);
+  border-color: var(--wood-700);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  padding: 0.85rem 1.6rem;
+  font-size: 1.05rem;
+  border-radius: var(--radius-lg);
+}
+
+/* ==========================================================================
+   Cards & Surfaces
+   ========================================================================== */
+.card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--ivory-300);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--ivory-400);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.card-cream {
+  background-color: var(--ivory-50);
+  border: 1px solid var(--ivory-300);
+}
+
+/* ==========================================================================
+   Badges (Status & Priority)
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Status Badges */
+.badge-pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  border: 1px solid var(--status-pending-border);
+}
+
+.badge-in-progress {
+  background-color: var(--status-progress-bg);
+  color: var(--status-progress-text);
+  border: 1px solid var(--status-progress-border);
+}
+
+.badge-resolved {
+  background-color: var(--status-resolved-bg);
+  color: var(--status-resolved-text);
+  border: 1px solid var(--status-resolved-border);
+}
+
+/* Priority Badges */
+.badge-critical {
+  background-color: var(--priority-critical-bg);
+  color: var(--priority-critical-text);
+  border: 1px solid var(--priority-critical-border);
+}
+
+.badge-high {
+  background-color: var(--priority-high-bg);
+  color: var(--priority-high-text);
+  border: 1px solid var(--priority-high-border);
+}
+
+.badge-medium {
+  background-color: var(--priority-medium-bg);
+  color: var(--priority-medium-text);
+  border: 1px solid var(--priority-medium-border);
+}
+
+.badge-low {
+  background-color: var(--priority-low-bg);
+  color: var(--priority-low-text);
+  border: 1px solid var(--priority-low-border);
+}
+
+/* Tag badge */
+.badge-category {
+  background-color: var(--ivory-200);
+  color: var(--wood-800);
+  border: 1px solid var(--ivory-300);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--wood-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-label .required {
+  color: var(--maroon-primary);
+  margin-left: 0.25rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--ivory-400);
+  background-color: var(--white);
+  color: var(--charcoal-900);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--wood-600);
+  box-shadow: 0 0 0 3px rgba(107, 58, 28, 0.12);
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+  color: var(--charcoal-400);
+}
+
+.form-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--charcoal-500);
+}
+
+/* ==========================================================================
+   Table Styles
+   ========================================================================== */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--ivory-300);
+  background-color: var(--white);
+  box-shadow: var(--shadow-xs);
+}
+
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.table-custom th {
+  background-color: var(--ivory-200);
+  color: var(--wood-900);
+  font-weight: 700;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--ivory-400);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+.table-custom td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--ivory-200);
+  color: var(--charcoal-800);
+  vertical-align: middle;
+}
+
+.table-custom tr:last-child td {
+  border-bottom: none;
+}
+
+.table-custom tr:hover td {
+  background-color: var(--ivory-50);
+}
+
+/* ==========================================================================
+   Stat Cards Grid
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   Toasts & Alerts
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 400px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: var(--white);
+  border-left: 4px solid var(--wood-700);
+  animation: slideIn 0.3s ease forwards;
+}
+
+.toast-success {
+  border-left-color: #16A34A;
+  background-color: #F0FDF4;
+  color: #14532D;
+}
+
+.toast-error {
+  border-left-color: #DC2626;
+  background-color: #FEF2F2;
+  color: #7F1D1D;
+}
+
+.toast-info {
+  border-left-color: var(--wood-600);
+  background-color: var(--ivory-50);
+  color: var(--wood-900);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Modal Backdrop & Box
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 23, 26, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  padding: 1.5rem;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  max-width: 650px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--ivory-300);
+  animation: modalScale 0.2s ease-out;
+}
+
+@keyframes modalScale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Responsive Utilities
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1.25rem 1rem;
+  }
+  .page-title {
+    font-size: 1.5rem;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

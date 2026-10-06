@@ -1,0 +1,301 @@
+[
+  {
+    "id": "CF-2026-010",
+    "title": "Overhead water tank leakage in Sindhudurg 4th Floor",
+    "description": "Major water leakage from ceiling pipe flooding corridor outside computer lab",
+    "category": "Plumbing",
+    "priority": "High",
+    "priorityReason": "Major facility breakdown detected (keyword: \"major water leakage\"). Requires priority turnaround within 4-12 hours.",
+    "building": "Sindhudurg",
+    "floor": "4th Floor",
+    "location": "Computer Lab 402 Entrance",
+    "reporterId": "USR-STU-MUWB55GZ-2356",
+    "reporterName": "Prathamesh Shinde",
+    "reporterEmail": "student_1791268713907@csmu.ac.in",
+    "image": null,
+    "status": "Resolved",
+    "resolutionNotes": "Pipe replaced and corridor dried. Overhead water supply restored normal pressure.",
+    "createdAt": "2026-10-06T06:38:34.043Z",
+    "updatedAt": "2026-10-06T06:38:34.138Z",
+    "activityLog": [
+      {
+        "date": "2026-10-06T06:38:34.138Z",
+        "text": "Status changed from In Progress to Resolved (Notes: \"Pipe replaced and corridor dried. Overhead water supply restored normal pressure.\")"
+      },
+      {
+        "date": "2026-10-06T06:38:34.128Z",
+        "text": "Status changed from Pending to In Progress (Notes: \"Plumber dispatched with pipe sealant and replacement flange\")"
+      },
+      {
+        "date": "2026-10-06T06:38:34.043Z",
+        "text": "Issue registered by Prathamesh Shinde (CF-2026-010) with priority High."
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-009",
+    "title": "Severe sparks and burnt smell from corridor switchboard",
+    "description": "Visible electrical sparks when turning on corridor lights in Rajgad",
+    "category": "Electrical",
+    "priority": "Critical",
+    "priorityReason": "Immediate safety risk detected (keyword: \"spark\"). Escalated for instant administration intervention.",
+    "building": "Rajgad",
+    "floor": "3rd Floor",
+    "location": "Corridor Lab 301",
+    "reporterId": "USR-STU-MUWAOZQK-3677",
+    "reporterName": "Swaroop Patil",
+    "reporterEmail": "swaroop.patil@csmu.ac.in",
+    "image": null,
+    "status": "Resolved",
+    "assignedDepartment": "",
+    "resolutionNotes": "",
+    "createdAt": "2026-10-06T06:26:59.711Z",
+    "updatedAt": "2026-10-06T06:48:49.917Z",
+    "activityLog": [
+      {
+        "date": "2026-10-06T06:48:49.917Z",
+        "text": "Status changed from In Progress to Resolved"
+      },
+      {
+        "date": "2026-10-06T06:27:36.721Z",
+        "text": "Status changed from Pending to In Progress (Notes: \"Duty electrician sent to isolate breaker and inspect switchboard\")"
+      },
+      {
+        "date": "2026-10-06T06:26:59.711Z",
+        "text": "Issue registered by Swaroop Patil (CF-2026-009) with priority Critical."
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-001",
+    "title": "Ceiling projector not displaying HDMI input in Lecture Hall 204",
+    "description": "The ceiling-mounted Epson projector in Rajgad 204 powers on with a blue indicator, but displays \"No Signal Input\" whenever a faculty or student connects to the podium HDMI cable. 3rd year Engineering lectures are getting delayed.",
+    "category": "Classroom / Lab",
+    "priority": "Medium",
+    "priorityReason": "Academic or utility disruption detected (keyword: \"projector\"). Scheduled for routine resolution.",
+    "building": "Rajgad",
+    "floor": "2nd Floor",
+    "location": "Lecture Hall 204 (Podium Area)",
+    "reporterId": "USR-SEED-001",
+    "reporterName": "Aarav Sharma",
+    "reporterEmail": "aarav.sharma@csmu.ac.in",
+    "image": null,
+    "status": "In Progress",
+    "createdAt": "2026-10-04T09:30:00.000Z",
+    "updatedAt": "2026-10-05T11:00:00.000Z",
+    "assignedDepartment": "IT & Network Services",
+    "resolutionNotes": "Technician inspected the cable; replacement 4K HDMI transmitter and splitter requested from stores.",
+    "activityLog": [
+      {
+        "date": "2026-10-04T09:30:00.000Z",
+        "text": "Issue submitted by Aarav Sharma (CF-2026-001)"
+      },
+      {
+        "date": "2026-10-05T11:00:00.000Z",
+        "text": "Status changed to In Progress by Admin (Vikas Kumar)"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-002",
+    "title": "High-pressure pipeline water leakage flooding corridor",
+    "description": "Continuous water leakage from the main overhead flush pipeline outside the 1st floor boys washroom. Water is accumulating rapidly across the corridor, creating a severe slipping hazard for students and staff.",
+    "category": "Plumbing",
+    "priority": "High",
+    "priorityReason": "Major facility breakdown detected (keyword: \"major water leakage\"). Requires priority turnaround within 4-12 hours.",
+    "building": "Pratapgad",
+    "floor": "1st Floor",
+    "location": "West Wing Corridor, near Washroom Block B",
+    "reporterId": "USR-SEED-002",
+    "reporterName": "Ananya Patil",
+    "reporterEmail": "ananya.patil@csmu.ac.in",
+    "image": null,
+    "status": "Pending",
+    "createdAt": "2026-10-05T08:15:00.000Z",
+    "updatedAt": "2026-10-05T08:15:00.000Z",
+    "assignedDepartment": "Plumbing & Water Management",
+    "resolutionNotes": "",
+    "activityLog": [
+      {
+        "date": "2026-10-05T08:15:00.000Z",
+        "text": "Issue submitted by Ananya Patil (CF-2026-002)"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-003",
+    "title": "Campus Wi-Fi access point offline during practical sessions",
+    "description": "Students and research scholars on the 3rd floor of Sindhudurg cannot authenticate on \"CSMU-Student-Secure\". Access point 3B shows a blinking amber LED and disconnects after 30 seconds.",
+    "category": "IT / Wi-Fi",
+    "priority": "Medium",
+    "priorityReason": "Academic or utility disruption detected (keyword: \"wi-fi\"). Scheduled for routine resolution.",
+    "building": "Sindhudurg",
+    "floor": "3rd Floor",
+    "location": "Advanced Computing Lab 305 & Surrounding Area",
+    "reporterId": "USR-SEED-003",
+    "reporterName": "Rohan Deshmukh",
+    "reporterEmail": "rohan.deshmukh@csmu.ac.in",
+    "image": null,
+    "status": "Resolved",
+    "createdAt": "2026-10-02T14:20:00.000Z",
+    "updatedAt": "2026-10-03T16:45:00.000Z",
+    "assignedDepartment": "IT & Network Services",
+    "resolutionNotes": "PoE port power cycle executed and Cisco access point firmware restarted. Ping latency verified below 5ms.",
+    "activityLog": [
+      {
+        "date": "2026-10-02T14:20:00.000Z",
+        "text": "Issue submitted by Rohan Deshmukh (CF-2026-003)"
+      },
+      {
+        "date": "2026-10-03T10:00:00.000Z",
+        "text": "Status changed to In Progress"
+      },
+      {
+        "date": "2026-10-03T16:45:00.000Z",
+        "text": "Status marked Resolved by Network Admin"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-004",
+    "title": "Exposed live wiring and electrical sparks near corridor switchboard",
+    "description": "Corridor switchboard next to Room 102 has a cracked faceplate with exposed live copper wires. When flipping the master tube light switch, visible sparks and a burnt plastic odor were reported.",
+    "category": "Safety",
+    "priority": "Critical",
+    "priorityReason": "Immediate safety risk detected (keyword: \"spark\"). Escalated for instant administration intervention.",
+    "building": "Shivneri",
+    "floor": "1st Floor",
+    "location": "Room 102 Outer Wall Switchboard",
+    "reporterId": "USR-SEED-004",
+    "reporterName": "Tanvi Kulkarni",
+    "reporterEmail": "tanvi.kulkarni@csmu.ac.in",
+    "image": null,
+    "status": "In Progress",
+    "createdAt": "2026-10-05T16:40:00.000Z",
+    "updatedAt": "2026-10-05T17:15:00.000Z",
+    "assignedDepartment": "Electrical Maintenance Unit",
+    "resolutionNotes": "Circuit breaker isolated immediately by campus duty electrician. New modular polycarbonate box being mounted.",
+    "activityLog": [
+      {
+        "date": "2026-10-05T16:40:00.000Z",
+        "text": "Issue submitted by Tanvi Kulkarni (CF-2026-004)"
+      },
+      {
+        "date": "2026-10-05T17:15:00.000Z",
+        "text": "Emergency dispatch: Status changed to In Progress"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-005",
+    "title": "Broken badminton court net tensioner and damaged boundary posts",
+    "description": "The steel tension cable on Badminton Court 2 has snapped at the post anchor. The post is leaning inwards and the net cannot be set to standard height for inter-college trials.",
+    "category": "Sports",
+    "priority": "Low",
+    "priorityReason": "Non-urgent maintenance request (item: \"badminton net\"). Batched for standard housekeeping or carpentry.",
+    "building": "Badminton Court",
+    "floor": "Ground Floor",
+    "location": "Indoor Sports Complex, Court 2",
+    "reporterId": "USR-SEED-005",
+    "reporterName": "Siddharth Gaikwad",
+    "reporterEmail": "siddharth.gaikwad@csmu.ac.in",
+    "image": null,
+    "status": "Pending",
+    "createdAt": "2026-10-04T17:30:00.000Z",
+    "updatedAt": "2026-10-04T17:30:00.000Z",
+    "assignedDepartment": "Sports & Physical Education Dept",
+    "resolutionNotes": "",
+    "activityLog": [
+      {
+        "date": "2026-10-04T17:30:00.000Z",
+        "text": "Issue submitted by Siddharth Gaikwad (CF-2026-005)"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-006",
+    "title": "Damaged wooden lecture benches with exposed nails",
+    "description": "Two double-bench seats in row 4 of the Law College classroom have splintered wooden armrests with rusted nails exposed. Multiple students have torn shirts and reported scrape hazards.",
+    "category": "Infrastructure",
+    "priority": "Low",
+    "priorityReason": "Non-urgent maintenance request (item: \"bench\"). Batched for standard housekeeping or carpentry.",
+    "building": "Pharmacy Block",
+    "floor": "2nd Floor",
+    "location": "Law College Lecture Hall L-204, Row 4",
+    "reporterId": "USR-SEED-006",
+    "reporterName": "Pooja Jadhav",
+    "reporterEmail": "pooja.jadhav@csmu.ac.in",
+    "image": null,
+    "status": "Pending",
+    "createdAt": "2026-10-05T11:05:00.000Z",
+    "updatedAt": "2026-10-05T11:05:00.000Z",
+    "assignedDepartment": "Estate & Maintenance Office",
+    "resolutionNotes": "",
+    "activityLog": [
+      {
+        "date": "2026-10-05T11:05:00.000Z",
+        "text": "Issue submitted by Pooja Jadhav (CF-2026-006)"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-007",
+    "title": "Central water cooler cooling failure and clogged drainage basin",
+    "description": "The drinking water cooler near the main canteen is dispensing warm water despite high ambient temperature. The drain basin is clogged with tea cups and overflowing onto the pedestrian pathway.",
+    "category": "Plumbing",
+    "priority": "Medium",
+    "priorityReason": "Academic or utility disruption detected (keyword: \"water cooler\"). Scheduled for routine resolution.",
+    "building": "Drinking Water Areas",
+    "floor": "Ground Floor",
+    "location": "Common Canteen Central Drinking Water Station",
+    "reporterId": "USR-SEED-007",
+    "reporterName": "Kunal Shinde",
+    "reporterEmail": "kunal.shinde@csmu.ac.in",
+    "image": null,
+    "status": "In Progress",
+    "createdAt": "2026-10-05T13:40:00.000Z",
+    "updatedAt": "2026-10-05T14:30:00.000Z",
+    "assignedDepartment": "Plumbing & Water Management",
+    "resolutionNotes": "Drain unclogged. Compressor coolant level to be inspected tomorrow morning.",
+    "activityLog": [
+      {
+        "date": "2026-10-05T13:40:00.000Z",
+        "text": "Issue submitted by Kunal Shinde (CF-2026-007)"
+      },
+      {
+        "date": "2026-10-05T14:30:00.000Z",
+        "text": "Status changed to In Progress"
+      }
+    ]
+  },
+  {
+    "id": "CF-2026-008",
+    "title": "Overflowing garbage bins and unsanitary food courtyard",
+    "description": "Outdoor dustbins behind food court counters are overflowing with food waste and packaging. Stray dogs are scattering trash across the paved seating area.",
+    "category": "Cleanliness",
+    "priority": "Low",
+    "priorityReason": "Non-urgent maintenance request (item: \"garbage\"). Batched for standard housekeeping or carpentry.",
+    "building": "Common Canteen",
+    "floor": "Ground Floor",
+    "location": "Food Court Rear Dining Courtyard",
+    "reporterId": "USR-SEED-008",
+    "reporterName": "Meera Nair",
+    "reporterEmail": "meera.nair@csmu.ac.in",
+    "image": null,
+    "status": "Resolved",
+    "createdAt": "2026-10-03T15:20:00.000Z",
+    "updatedAt": "2026-10-03T18:00:00.000Z",
+    "assignedDepartment": "Campus Housekeeping & Sanitation",
+    "resolutionNotes": "Special sanitation drive completed. Added two 240L wheeled garbage bins with lids.",
+    "activityLog": [
+      {
+        "date": "2026-10-03T15:20:00.000Z",
+        "text": "Issue submitted by Meera Nair (CF-2026-008)"
+      },
+      {
+        "date": "2026-10-03T18:00:00.000Z",
+        "text": "Status marked Resolved by Housekeeping Supervisor"
+      }
+    ]
+  }
+]
