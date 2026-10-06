@@ -2,6 +2,18 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcryptjs';
+import { 
+  TABLE_NAME, 
+  getIssuesFromDynamo, 
+  getIssueByIdFromDynamo, 
+  getIssuesByReporterIdFromDynamo, 
+  createIssueInDynamo, 
+  updateIssueInDynamo, 
+  deleteIssueFromDynamo, 
+  migrateIssuesToDynamo,
+  sanitizeImageForStorage 
+} from '../services/dynamoDb.js';
+import { calculatePriority } from './priorityEngine.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -302,6 +314,20 @@ export async function initDb() {
     await writeIssues(issues);
     console.log(`[DB] Seeded ${issues.length} initial issues into issues.json`);
   }
+
+  // 3. Connect to Amazon DynamoDB and migrate seed data if table is empty
+  try {
+    const dynamoIssues = await getIssuesFromDynamo();
+    if (dynamoIssues.length === 0 && issues.length > 0) {
+      console.log(`[DynamoDB] Table "${TABLE_NAME}" has 0 items. Migrating issues to DynamoDB...`);
+      const result = await migrateIssuesToDynamo(issues);
+      console.log(`[DynamoDB] Successfully migrated ${result.migrated} issues to table "${TABLE_NAME}".`);
+    } else {
+      console.log(`[DynamoDB] Table "${TABLE_NAME}" verified (${dynamoIssues.length} issues present).`);
+    }
+  } catch (err) {
+    console.log(`[DynamoDB] Table "${TABLE_NAME}" status: ${err.message}. Local backup active.`);
+  }
 }
 
 /**
@@ -390,35 +416,34 @@ export async function createStudentUser(userData) {
   return newUser;
 }
 
-// ==================== ISSUE OPERATIONS ====================
+// ==================== ISSUE OPERATIONS (DYNAMODB PRIMARY) ====================
 
-export async function getIssues() {
+/**
+ * Reads issues from local JSON file (used for fallback or seeding)
+ */
+async function getJsonIssues() {
   try {
     const raw = await fs.readFile(ISSUES_FILE, 'utf-8');
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
   } catch (err) {
     return [];
   }
 }
 
-export async function getIssueById(id) {
-  const issues = await getIssues();
-  return issues.find(i => i.id === id) || null;
+async function getJsonIssueById(id) {
+  const issues = await getJsonIssues();
+  return issues.find(i => (i.issueId === id || i.id === id)) || null;
 }
 
-export async function getIssuesByReporterId(reporterId) {
-  const issues = await getIssues();
-  return issues.filter(i => i.reporterId === reporterId);
-}
+async function createJsonIssue(issueData) {
+  const issues = await getJsonIssues();
 
-export async function createIssue(issueData) {
-  const issues = await getIssues();
-
-  // Generate next sequential ID e.g. CF-2026-009
   const currentYear = new Date().getFullYear();
   const maxSeq = issues.reduce((acc, curr) => {
-    if (curr.id && curr.id.startsWith('CF-')) {
-      const parts = curr.id.split('-');
+    const targetId = curr.issueId || curr.id || '';
+    if (targetId.startsWith('CF-')) {
+      const parts = targetId.split('-');
       if (parts.length === 3) {
         const num = parseInt(parts[2], 10);
         if (!isNaN(num)) return Math.max(acc, num);
@@ -429,23 +454,29 @@ export async function createIssue(issueData) {
 
   const nextSeq = maxSeq + 1;
   const newId = `CF-${currentYear}-${String(nextSeq).padStart(3, '0')}`;
-
   const now = new Date().toISOString();
 
+  const sanitizedImage = sanitizeImageForStorage(issueData.image);
+
+  const priorityResult = (issueData.priority && issueData.priorityReason)
+    ? { priority: issueData.priority, reason: issueData.priorityReason }
+    : calculatePriority(issueData.category, issueData.title, issueData.description);
+
   const newIssue = {
+    issueId: newId,
     id: newId,
-    title: issueData.title.trim(),
-    description: issueData.description.trim(),
-    category: issueData.category,
-    priority: issueData.priority,
-    priorityReason: issueData.priorityReason || '',
-    building: issueData.building,
+    title: (issueData.title || '').trim(),
+    description: (issueData.description || '').trim(),
+    category: issueData.category || 'Other',
+    priority: priorityResult.priority,
+    priorityReason: priorityResult.reason,
+    building: issueData.building || 'Campus',
     floor: issueData.floor || 'Ground Floor',
-    location: issueData.location ? issueData.location.trim() : '',
-    reporterId: issueData.reporterId,
-    reporterName: issueData.reporterName,
-    reporterEmail: issueData.reporterEmail,
-    image: issueData.image || null,
+    location: (issueData.location || '').trim(),
+    reporterId: issueData.reporterId || '',
+    reporterName: issueData.reporterName || '',
+    reporterEmail: issueData.reporterEmail || '',
+    image: sanitizedImage,
     status: 'Pending',
     assignedDepartment: issueData.assignedDepartment || 'Estate & Maintenance Office',
     resolutionNotes: '',
@@ -459,15 +490,14 @@ export async function createIssue(issueData) {
     ],
   };
 
-  // Prepend to list
   issues.unshift(newIssue);
   await writeIssues(issues);
   return newIssue;
 }
 
-export async function updateIssue(id, updateData) {
-  const issues = await getIssues();
-  const index = issues.findIndex(i => i.id === id);
+async function updateJsonIssue(id, updateData) {
+  const issues = await getJsonIssues();
+  const index = issues.findIndex(i => (i.issueId === id || i.id === id));
   if (index === -1) return null;
 
   const current = issues[index];
@@ -487,22 +517,128 @@ export async function updateIssue(id, updateData) {
   const updated = {
     ...current,
     ...updateData,
+    issueId: id,
+    id: id,
     status: newStatus,
     updatedAt: now,
     activityLog: logEntries,
   };
+
+  if ('image' in updateData) {
+    updated.image = sanitizeImageForStorage(updateData.image);
+  }
 
   issues[index] = updated;
   await writeIssues(issues);
   return updated;
 }
 
-export async function deleteIssue(id) {
-  const issues = await getIssues();
-  const index = issues.findIndex(i => i.id === id);
+async function deleteJsonIssue(id) {
+  const issues = await getJsonIssues();
+  const index = issues.findIndex(i => (i.issueId === id || i.id === id));
   if (index === -1) return false;
 
   issues.splice(index, 1);
   await writeIssues(issues);
   return true;
+}
+
+/**
+ * Retrieves all issues from Amazon DynamoDB (CampusFixIssues table)
+ * Falls back to local JSON store if DynamoDB is unreachable
+ */
+export async function getIssues() {
+  try {
+    return await getIssuesFromDynamo();
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on getIssues: ${err.message}. Using local store.`);
+    return await getJsonIssues();
+  }
+}
+
+/**
+ * Retrieves a single issue by partition key issueId from Amazon DynamoDB
+ */
+export async function getIssueById(id) {
+  try {
+    return await getIssueByIdFromDynamo(id);
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on getIssueById(${id}): ${err.message}. Using local store.`);
+    return await getJsonIssueById(id);
+  }
+}
+
+/**
+ * Retrieves issues filtered by reporterId
+ */
+export async function getIssuesByReporterId(reporterId) {
+  try {
+    return await getIssuesByReporterIdFromDynamo(reporterId);
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on getIssuesByReporterId: ${err.message}. Using local store.`);
+    const issues = await getJsonIssues();
+    return issues.filter(i => i.reporterId === reporterId);
+  }
+}
+
+/**
+ * Creates a new issue in Amazon DynamoDB (CampusFixIssues table)
+ * Authoritatively calculates priority and reason using Priority Engine
+ * Sanitizes image (no Base64 in DynamoDB, compatible with future S3)
+ */
+export async function createIssue(issueData) {
+  try {
+    const created = await createIssueInDynamo(issueData);
+    // Mirror to local store for offline cache
+    try {
+      const localIssues = await getJsonIssues();
+      localIssues.unshift(created);
+      await writeIssues(localIssues);
+    } catch {}
+    return created;
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on createIssue: ${err.message}. Using local store.`);
+    return await createJsonIssue(issueData);
+  }
+}
+
+/**
+ * Updates an issue in Amazon DynamoDB (CampusFixIssues table)
+ */
+export async function updateIssue(id, updateData) {
+  try {
+    const updated = await updateIssueInDynamo(id, updateData);
+    if (updated) {
+      try {
+        const localIssues = await getJsonIssues();
+        const idx = localIssues.findIndex(i => (i.issueId === id || i.id === id));
+        if (idx !== -1) {
+          localIssues[idx] = updated;
+          await writeIssues(localIssues);
+        }
+      } catch {}
+    }
+    return updated;
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on updateIssue: ${err.message}. Using local store.`);
+    return await updateJsonIssue(id, updateData);
+  }
+}
+
+/**
+ * Deletes an issue from Amazon DynamoDB (CampusFixIssues table)
+ */
+export async function deleteIssue(id) {
+  try {
+    await deleteIssueFromDynamo(id);
+    try {
+      const localIssues = await getJsonIssues();
+      const filtered = localIssues.filter(i => (i.issueId !== id && i.id !== id));
+      await writeIssues(filtered);
+    } catch {}
+    return true;
+  } catch (err) {
+    console.warn(`[DynamoDB] Notice on deleteIssue: ${err.message}. Using local store.`);
+    return await deleteJsonIssue(id);
+  }
 }
