@@ -67,9 +67,9 @@ app.use((err, req, res, next) => {
 });
 
 // Initialize database and start listening
-async function startServer() {
-  try {
-    await initDb();
+try {
+  await initDb();
+  if (!process.env.VERCEL) {
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`====================================================`);
       console.log(`  CampusFix Server running on http://localhost:${PORT}`);
@@ -77,10 +77,12 @@ async function startServer() {
       console.log(`  Chhatrapati Shivaji Maharaj University (CSMU), Panvel`);
       console.log(`====================================================`);
     });
-  } catch (err) {
-    console.error('Failed to initialize CampusFix backend server:', err);
+  }
+} catch (err) {
+  console.error('Failed to initialize CampusFix backend server:', err);
+  if (!process.env.VERCEL) {
     process.exit(1);
   }
 }
 
-startServer();
+export default app;

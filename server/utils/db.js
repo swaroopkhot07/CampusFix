@@ -6,7 +6,11 @@ import bcrypt from 'bcryptjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DATA_DIR = path.resolve(__dirname, '../data');
+const SOURCE_DATA_DIR = path.resolve(__dirname, '../data');
+const DATA_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'campusfix-data')
+  : SOURCE_DATA_DIR;
+
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const ISSUES_FILE = path.join(DATA_DIR, 'issues.json');
 
@@ -213,6 +217,31 @@ const INITIAL_SEED_ISSUES = [
  */
 export async function initDb() {
   await fs.mkdir(DATA_DIR, { recursive: true });
+
+  // On Vercel, copy bundled seed files to writable /tmp if they don't exist yet
+  if (process.env.VERCEL && DATA_DIR !== SOURCE_DATA_DIR) {
+    try {
+      await fs.access(USERS_FILE);
+    } catch {
+      try {
+        const sourceUsers = await fs.readFile(path.join(SOURCE_DATA_DIR, 'users.json'), 'utf-8');
+        await fs.writeFile(USERS_FILE, sourceUsers, 'utf-8');
+      } catch (e) {
+        // Fall back to seeding
+      }
+    }
+
+    try {
+      await fs.access(ISSUES_FILE);
+    } catch {
+      try {
+        const sourceIssues = await fs.readFile(path.join(SOURCE_DATA_DIR, 'issues.json'), 'utf-8');
+        await fs.writeFile(ISSUES_FILE, sourceIssues, 'utf-8');
+      } catch (e) {
+        // Fall back to seeding
+      }
+    }
+  }
 
   // 1. Initialize users.json
   let users = [];
